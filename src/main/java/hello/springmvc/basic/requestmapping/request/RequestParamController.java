@@ -1,7 +1,9 @@
 package hello.springmvc.basic.requestmapping.request;
 
+import hello.springmvc.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -70,6 +72,26 @@ public class RequestParamController {
             @RequestParam(required = true, defaultValue = "guest") String username,
             @RequestParam(required = false, defaultValue = "-1") Integer age) throws IOException {
         log.info("username={}, age={}", username, age);
+
+        return "ok";
+    }
+
+    @RequestMapping("/model-attribute-v1")
+    @ResponseBody
+    public String modelAttribute1(@ModelAttribute HelloData helloData) throws IOException {
+
+        log.info("helloData={}", helloData);
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+
+        return "ok";
+    }
+
+    @RequestMapping("/model-attribute-v2")
+    @ResponseBody
+    public String modelAttribute2(HelloData helloData) throws IOException {
+
+        log.info("helloData={}", helloData);
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
 
         return "ok";
     }
